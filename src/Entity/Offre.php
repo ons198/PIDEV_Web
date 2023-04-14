@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\OffreRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Offre
@@ -24,13 +25,22 @@ use App\Repository\OffreRepository;
      */
     private $idOffre;
 
+
+
+
+    
     /**
      * @var int
      *
      * @ORM\Column(name="id_conducteur", type="integer", nullable=false)
+     * @Assert\GreaterThanOrEqual(
+     *      value = 0,
+     *      message = "Il faut utilisé un id qui existe déjà dans la base de l'admin"
+     * )
      */
     #[Assert\NotBlank(message:"Veuillez remplir ce champ ")]
     private $idConducteur;
+    
 
     /**
      * @var string
@@ -71,6 +81,13 @@ use App\Repository\OffreRepository;
      */
     #[Assert\NotBlank(message:"Veuillez remplir ce champ ")]
     private $typeVehicule;
+
+
+    #[ORM\OneToOne(mappedBy: 'idOffre', targetEntity: Reservation::class)]
+    private Collection $reservations;
+
+     
+
 
     public function getIdOffre(): ?int
     {

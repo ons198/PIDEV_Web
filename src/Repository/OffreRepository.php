@@ -39,6 +39,31 @@ class OffreRepository extends ServiceEntityRepository
         }
     }
 
+ public function removeByRe(int $id, bool $flush = false): void
+{
+    $offre = $this->getEntityManager()->getRepository(Offre::class)->find($id);
+
+    if ($offre !== null) {
+        $this->getEntityManager()->remove($offre);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+}
+/**
+ * @return Offre|null Returns an Offre object or null if not found
+ */
+public function findById(int $id): ?Offre
+{
+    return $this->createQueryBuilder('o')
+        ->andWhere('o.idOffre = :id')
+        ->setParameter('id', $id)
+        ->getQuery()
+        ->getOneOrNullResult();
+}
+
+
 //    /**
 //     * @return Offre[] Returns an array of Offre objects
 //     */

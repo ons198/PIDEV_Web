@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use DateTime; 
  
@@ -29,6 +30,7 @@ class Reservation
      *
      * @ORM\Column(name="nb_place", type="integer", nullable=false)
      */
+    #[Assert\NotBlank(message:"Veuillez remplir ce champ ")]
     private $nbPlace;
 
     /**
@@ -36,6 +38,7 @@ class Reservation
      *
      * @ORM\Column(name="date", type="date", nullable=false)
      */
+    #[Assert\NotBlank(message:"Veuillez remplir ce champ ")]
     private $date;
 
     /**
@@ -43,6 +46,9 @@ class Reservation
      *
      * @ORM\Column(name="id_client", type="integer", nullable=false)
      */
+    #[Assert\NotBlank(message:"Veuillez remplir ce champ ")]
+    #[Assert\NotBlank(message:"vous devez choisir un id qui existe déjà dans la base  ")]
+
     private $idClient;
 
     /**
@@ -50,6 +56,7 @@ class Reservation
      *
      * @ORM\Column(name="point_de_depart", type="string", length=255, nullable=false)
      */
+    #[Assert\NotBlank(message:"Veuillez remplir ce champ ")]
     private $pointDeDepart;
 
     /**
@@ -57,6 +64,7 @@ class Reservation
      *
      * @ORM\Column(name="point_arrive", type="string", length=255, nullable=false)
      */
+    #[Assert\NotBlank(message:"Veuillez remplir ce champ ")]
     private $pointArrive;
 
     /**
@@ -64,15 +72,23 @@ class Reservation
      *
      * @ORM\Column(name="id_conducteur", type="integer", nullable=false)
      */
+    #[Assert\NotBlank(message:"Veuillez remplir ce champ ")]
+    #[Assert\NotBlank(message:"vous devez choisir un id qui existe déjà dans la base  ")]
     private $idConducteur;
+
+    
+     
 
     /**
      * @var int
      *
      * @ORM\Column(name="id_offre", type="integer", nullable=false)
      */
+    #[Assert\NotBlank(message:"Veuillez remplir ce champ ")]
+    #[ORM\OneToOne(inversedBy: 'reservation')]
     private $idOffre;
 
+    
     public function getIdReservation(): ?int
     {
         return $this->idReservation;

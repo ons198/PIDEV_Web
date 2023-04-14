@@ -1,4 +1,4 @@
-{% extends 'baseFront.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Reservation index{% endblock %}
 
@@ -32,7 +32,7 @@
                 <td>{{ reservation.idOffre }}</td>
                 <td>
                     <a href="{{ path('app_reservation_show', {'idReservation': reservation.idReservation}) }}">show</a>
-                    <a href="{{ path('app_reservation_edit', {'idReservation': reservation.idReservation}) }}">edit</a>
+ 
                 </td>
             </tr>
         {% else %}
@@ -43,5 +43,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_reservation_new') }}">Create new</a>
+  
 {% endblock %}

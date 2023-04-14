@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Repository;
-
+use App\Entity\Offre;
 use App\Entity\Reservation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Repository\OffreRepository;
 
 /**
  * @extends ServiceEntityRepository<Reservation>
@@ -38,6 +39,24 @@ class ReservationRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function saveO(Reservation $entity, bool $flush = false): void
+    {
+        $offreId = $entity->getIdOffre(); // Assuming the ID attribute in Reservation entity for Offre is 'offre'
+        $offreRepository = $this->getEntityManager()->getRepository(Offre::class);
+        $offre = $offreRepository->findById($offreId);
+       
+    
+        if ($offre !== null) {
+            $this->getEntityManager()->remove($offre); // Mark Offre entity for removal
+            $this->getEntityManager()->persist($entity);
+        }
+    
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+    
 
 //    /**
 //     * @return Reservation[] Returns an array of Reservation objects

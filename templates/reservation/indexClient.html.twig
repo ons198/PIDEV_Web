@@ -31,8 +31,8 @@
                 <td>{{ reservation.idConducteur }}</td>
                 <td>{{ reservation.idOffre }}</td>
                 <td>
-                    <a href="{{ path('app_reservation_show', {'idReservation': reservation.idReservation}) }}">show</a>
-                    <a href="{{ path('app_reservation_edit', {'idReservation': reservation.idReservation}) }}">edit</a>
+                    <a href="{{ path('app_reservation_showfront', {'idReservation': reservation.idReservation}) }}">show</a>
+                    <a href="{{ path('app_reservation_editfront', {'idReservation': reservation.idReservation}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -43,5 +43,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_reservation_new') }}">Create new</a>
-{% endblock %}
+ {% endblock %}

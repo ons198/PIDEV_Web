@@ -6,6 +6,10 @@ use App\Entity\Reservation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Offre;
+use App\Entity\Client;
+use App\Entity\Conducteur;
 
 class ReservationType extends AbstractType
 {
@@ -14,10 +18,17 @@ class ReservationType extends AbstractType
         $builder
             ->add('nbPlace')
             ->add('date')
+            /*->add('idClient', EntityType::class, [
+                'class' => Client::class,
+                'placeholder' => 'Client',
+                'choice_label'=>'idClient',
+                'multiple' => false,
+                'expanded' => false
+            ])*/
             ->add('idClient')
             ->add('pointDeDepart')
             ->add('pointArrive')
-            ->add('idConducteur')
+            ->add('idConducteur') 
             ->add('idOffre')
         ;
     }
